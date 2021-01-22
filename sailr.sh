@@ -80,6 +80,7 @@ function print_error() {
   echo -e "\e[37mActual length: \e[33m$(echo $commit_message | wc -c)\033[0m\n"
 }
 
+
 set_config
 
 # check if the repo has a sailr config file
@@ -94,8 +95,18 @@ START_LINE=`head -n1 $INPUT_FILE`
 
 build_regex
 
+branches=($(jq -r '.branches[]' "$CONFIG"))
+branch_name=($(git rev-parse --abbrev-ref HEAD))
+
+echo $branches
+echo $branch_name
+
+if [[ " ${branches[*]} " == *"$SEARCH_STRING"* ]]; then
+
 if [[ ! $START_LINE =~ $regexp ]]; then
   # commit message is invalid according to config - block commit
   print_error
   exit 1
+fi
+
 fi

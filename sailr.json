@@ -1,6 +1,6 @@
 {
     "enabled": true,
-    "revert": true,
+    "revert": false,
     "length": {
         "min": 1,
         "max": 52
@@ -16,5 +16,8 @@
         "style",
         "test",
         "chore"
+    ],
+    "branches" : [
+        "testbranch"
     ]
 }
